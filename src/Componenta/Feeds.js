@@ -4,14 +4,14 @@ function Feeds() {
   const [data, setData] = useState([]);
   const { flag, setFlag,UserArray,setUserArray,UserName1,SetuserName1 } = useContext(Usecontext1);
 
-  
-  async function getFeeds() {
+  useEffect( () => {
     let url = "https://jsonplaceholder.typicode.com/posts";
-    let json = await fetch(url);
-    return json.json();
-  }
-  useEffect(async () => {
-    setData(await getFeeds());
+
+    fetch(url).then((value) => {
+      return value.json();
+    }).then((value) => {
+      setData(value);
+    })
   }, []);
 
   return (
@@ -19,7 +19,7 @@ function Feeds() {
       <div><h2>Feeds [All Posts]</h2></div>
       {data.map((element, index) => {
         if(element.userId == UserName1) {
-          return <React.Fragment key={index}>
+          return <div key={index}>
             <div>
               <p><b>User:</b>{element.userId}</p>
               <p><b>Title:</b>{element.title}</p>
@@ -27,7 +27,7 @@ function Feeds() {
               <p>View Comments</p>
               <hr/>
             </div>
-          </React.Fragment>
+          </div>
         }
       })}
     </>
