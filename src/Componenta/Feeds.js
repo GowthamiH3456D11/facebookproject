@@ -16,6 +16,7 @@ function Feeds() {
 
   return (
     <>
+    <div><h1>Hello</h1></div>
       <div><h2>Feeds [All Posts]</h2></div>
       {data.map((element, index) => {
         if(element.userId == UserName1) {
